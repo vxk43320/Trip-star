@@ -1,0 +1,227 @@
+﻿<style>
+    .suggestions {
+        position: fixed;
+        z-index: 2;
+        background-color: white;
+        border: 1px solid lightgray;
+        width: 33.8%;
+    }
+</style>
+<top-navigation></top-navigation>
+
+<div class="login_page_wrapper" style="width:1000px;">
+    <div class="md-card" style="background-color:aliceblue;" id="login_card">
+        <div class="md-card-content large-padding" id="login_form">
+            <!--<div class="login_heading" style="text-align:center;">
+                <!--<div class="user_avatar"></div>-->
+            <!--<img style="width:70%;" [src]="BizBanner" />-->
+            <!--</div>-->
+            
+                <div class="container">
+                    <div class="row">
+                        <button style="background-color:#607D8B;color:white;float:right;margin-right:15px;width:100px;" (click)="Back()">Back</button>
+                    </div>
+                    <div class="row" *ngIf="openfromlist== false">
+                        <!--<button (click)="Back()"></button>-->
+                        <!--<div class="col-lg-6">-->
+                        <div class="col-lg-2">
+                            Place
+                        </div>
+                        <div style="padding-bottom:20px;" class="col-lg-3">
+                            <div>
+                                <div class="input-field col s12" style="width:100%;">
+                                    <input id="country" name="host_Roomcountry" style="width:100%;border-left:0px;border-top:0px;border-right:0px;border:1px solid;height:35px;" type="text" (change)="onChangePlace($event.target.value)" class="validate filter-input" [(ngModel)]=query (keyup)=filter()>
+
+                                </div>
+                                <div class="suggestions" *ngIf="filteredList.length > 0">
+                                    <ul *ngFor="let item of filteredList">
+                                        <li>
+                                            <a (click)="select(item)">{{item}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!--<input type="text" style="width:100%;" [(ngModel)]="hstPlace" />-->
+                        </div>
+                        <div class="col-lg-2">
+                            Type
+                        </div>
+                        <div class="col-lg-3" style="padding-bottom:30px;">
+                            <select id="cmb1" (change)="onChange1($event.target.value)" name="host_type" [(ngModel)]="host_type" [ngModelOptions]="{standalone: true}" style="width:100%;border-left:0px;border-top:0px;border-right:0px;border:1px solid;height:35px;">
+                                <!--[(ngModel)]="host_Roomtype"-->
+                                <option id="c1" value="Home">Home</option>
+                                <option id="c2" value="Experience">Experience</option>
+
+
+                            </select>
+                        </div>
+                        <div class="col-lg-2" *ngIf="showrumtype">
+                            Room Type
+                        </div>
+                        <div class="col-lg-3" style="padding-bottom:30px;" *ngIf="showrumtype">
+                            <select id="cmb2"  (change)="onChange($event.target.value)" name="host_Roomtype" [(ngModel)]="host_Roomtype" [ngModelOptions]="{standalone: true}" style="width:100%;border-left:0px;border-top:0px;border-right:0px;border:1px solid;height:35px;">
+                                <!--[(ngModel)]="host_Roomtype"-->
+                                <option id="c3" value="Single">Single</option>
+                                <option id="c4" value="Double">Double</option>
+
+
+                            </select>
+                        </div>
+                        <div class="col-lg-2">
+                            Description
+                        </div>
+                        <div class="col-lg-3" style="padding-bottom:30px;">
+                            <input type="text" name="host_Roomdescr" style="width:100%;border-left:0px;border-top:0px;border-right:0px;border:1px solid;height:35px;" [(ngModel)]="host_Description" />
+                        </div>
+                        <div class="col-lg-2">
+                            Photo
+                        </div>
+                        <div class="col-lg-3" style="height:150px;padding-bottom:20px;">
+                            <img [src]="src" name="host_Roomphoto" [hidden]="!src" style="height:-webkit-fill-available;">
+                            <input type="file" name="host_Roomphoto1" class="hide_file" imageUpload
+                                   (imageSelected)="selected($event)" title="Add Image">
+                        </div>
+                        <div class="col-lg-2">
+                            Price
+                        </div>
+                        <div class="col-lg-3" style="padding-bottom:30px;">
+                            <input type="text" name="host_price" style="width:100%;border-left:0px;border-top:0px;border-right:0px;border:1px solid;height:40px;" [(ngModel)]="host_Price" />
+                        </div>
+                        <div class="col-lg-2" *ngIf="openfromlist">
+                            Review
+                        </div>
+                        <div class="col-lg-3" style="padding-bottom:30px;" *ngIf="openfromlist">
+                            <!--<input type="text" style="width:100%;" [(ngModel)]="host_Price" />-->
+                            <textarea rows="4" *ngIf="this.tripstarservice.UserID ==''" disabled="disabled" id="txtCustomerMemo" class="md-input" [(ngModel)]="host_Review" md-input textarea-autosize></textarea>
+                            <textarea rows="4" *ngIf="this.tripstarservice.UserID !=''" id="txtCustomerMemo" class="md-input" [(ngModel)]="host_Review" md-input textarea-autosize></textarea>
+                        </div>
+                        <div class="col-lg-2">
+
+                        </div>
+                        <div class="col-lg-3" style="padding-bottom:30px;">
+                            <div class="uk-margin-medium-top" *ngIf="openhost==false">
+                                <a id="signIn" (click)="Savehostdtls()" class="md-btn md-btn-primary md-btn-block md-btn-large">Submit</a>
+
+                            </div>
+
+
+                        </div>
+                        <!--</div>
+            <div class="col-lg-6">
+
+            </div>-->
+
+                    </div>
+
+                    <div class="row" *ngIf="openfromlist">
+                        <div class="col-lg-12" *ngIf="!showReviews">
+                            <div class="col-lg-2">
+                                Place
+                            </div>
+                            <div style="padding-bottom:20px;" class="col-lg-3">
+                                <div>
+                                    {{query}}
+
+                                </div>
+
+                            </div>
+                            <div class="col-lg-2">
+                                Room Type
+                            </div>
+                            <div class="col-lg-3" style="padding-bottom:30px;">
+                                {{host_Roomtype}}
+
+                            </div>
+                            <div class="col-lg-2">
+                                Description
+                            </div>
+                            <div class="col-lg-3" style="padding-bottom:30px;">
+                                {{host_Description}}
+
+                            </div>
+                            <div class="col-lg-2">
+                                Photo
+                            </div>
+                            <div class="col-lg-3" style="height:150px;padding-bottom:20px;">
+                                <img [src]="src" [hidden]="!src" style="height:-webkit-fill-available;">
+
+                            </div>
+                            <div class="col-lg-2">
+                                Price
+                            </div>
+                            <div class="col-lg-3" style="padding-bottom:30px;">
+                                {{host_Price}}
+
+                            </div>
+                            <div class="col-lg-12">
+                                <a (click)="ShowReviews()">Reviews</a>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-12" *ngIf="showReviews">
+                            <table style="table-layout:fixed;width:100%;">
+
+                                <tr style="border:1px solid lightgray;height:40px;font-weight:bold;background-color:#607D8B;color:white;">
+                                    <td style="text-align:center;">
+                                        Review
+                                    </td>
+                                    <td style="text-align:center;">
+                                        User
+                                    </td>
+
+                                </tr>
+
+
+                                <tr *ngFor="let rvw of  rvews" style="border-bottom:1px solid lightgray;padding:10px;height:40px;">
+
+                                    <td>
+                                        {{rvw.Reviewdescription}}
+                                    </td>
+                                    <td>
+                                        {{rvw.user}}
+                                    </td>
+
+                                </tr>
+                            </table>
+                            <div class="col-lg-2" *ngIf="openfromlist">
+
+                            </div>
+                            <div class="col-lg-3" style="padding-bottom:30px;" *ngIf="openfromlist && this.review">
+                                <!--<input type="text" style="width:100%;" [(ngModel)]="host_Price" />-->
+                                
+                                    <textarea rows="4" *ngIf="this.tripstarservice.UserID !=''" placeholder="write review" id="txtCustomerMemo" class="md-input" [(ngModel)]="host_Review" md-input textarea-autosize></textarea>
+                                
+                                </div>
+                            <div class="col-lg-2">
+
+                            </div>
+                            <div class="col-lg-3" style="padding-bottom:30px;" *ngIf ="this.review">
+
+                                <div class="uk-margin-medium-top" *ngIf="this.tripstarservice.UserID !='' && openhost != false">
+                                    <a id="signIn" (click)="SaveReviews()" class="md-btn md-btn-primary md-btn-block md-btn-large">Submit</a>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!--</div>
+        <div class="col-lg-6">
+
+        </div>-->
+
+                </div>
+
+            
+               
+
+
+
+                    </div>
+           
+        </div>
+    </div>

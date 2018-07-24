@@ -1,0 +1,89 @@
+﻿<style>
+    .suggestions {
+        position: fixed;
+        z-index: 3;
+        background-color: white;
+        border: 1px solid lightgray;
+        width: 21.6%;
+    }
+</style>
+<div class="container" style="background-color:#607D8B;">
+    <div class="row col-lg-12" style="padding-top:5px;">
+        <div class="col-lg-1" style="padding-left:10px;">
+            <h1><a routerLink="/dashboard" style="color:white;text-align:right;" routerLinkActive="active">{{title}}</a></h1>
+        </div>
+        <div class="col-lg-8" style="padding-top:5px;">
+            <div class="col-lg-11">
+                <div class="input-field col s12" style="width:100%;">
+                    <input id="country" style="width:100%;" type="text" placeholder="Search" (change)="onChangePlace($event.target.value)" class="validate filter-input" [(ngModel)]=query (keyup)=filter()>
+                   
+                </div>
+                <div class="suggestions" *ngIf="filteredList.length > 0">
+                    <ul *ngFor="let item of filteredList">
+                        <li>
+                            <a (click)="select(item)">{{item}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                
+                <input type="date" placeholder="checkin" (ngModelChange)="checkInDate($event)" [ngModel]="chkinDate" />
+                <span style="color:white;">CheckIn</span>
+            </div>
+            <div class="col-lg-7">
+                <input type="date" placeholder="checkout" (ngModelChange)="checkOutDate($event)" [ngModel]="chkoutDate" />
+                <span style="color:white;">CheckOut</span>
+            </div>
+            <div class="col-lg-7">
+                <input style="width:110%;" type="text" (ngModelChange)="checkNoGuests($event)" [ngModel]="Guests" placeholder="Guests" />
+                <span style="color:white;">Guests</span>
+            </div>
+        </div>
+
+
+        <div class="col-lg-2" style="padding-top:5px;white-space:nowrap;">
+            <div class="col-lg-7">
+                <a routerLink="/host" (click)="Host()" style="color:white;text-align:left" routerLinkActive="active">Become a Host</a>
+            </div>
+            <div class="col-lg-7" style="text-align:right;">
+                <a routerLink="/dashboard" style="color:white;text-align:right;" routerLinkActive="active">Help</a>
+            </div>
+            <div class="col-lg-7">
+                <a style="color:white;" (click)="Signuppage(tripstarservice.Signup)" routerLinkActive="active">{{tripstarservice.Signup}}</a>
+                <div class="container" (click)="Signuppage(tripstarservice.Signup)" *ngIf="showpopup" style="width:auto;min-height:100px;background-color:white;position:fixed;z-index:1;border:1px solid lightgray">
+                    <div *ngFor="let res of  tripstarservice.showMessage" (click)="MessageSelection(res.bookingId)" style="border-bottom: 1px solid lightgray;cursor:pointer;">
+                        <!-- Booking icon by Icons8 -->
+                        <img class="icon icons8-Booking" width="30" height="30" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAB1ElEQVRIS+1W0W0CMQy1E4nfdoOyQbtBrxOUDXof5MRnNwA24BOR+7gRjgkKG5QN2g3aXyTsyicHBXrAQSuhVkQ66RTZfn4vjh2EMy08Ey5cgBsr75y7E2Pv/Wtjp8jwKKl7vV57tVo9AkCKiBUwMwtwYa2djsfjt6ZJHARO0/S61WoJWEe/EHuhP7cRWAkA5XK5nBZF8bEviZ3AWZZ1mLkCRMRrZfcuga21o8BOVXhWuxu1E9CSmcs8z6d1CWwAK7u+Mmurw6cEIaIiz/PZPhbdbjcxxqTqf6W2Ir+oMIxV2ABWxxfNWjItvfdF03OL7ZxzVQKIKKoBET3EidcCM/Pce5+cArjtk2XZAAD6fw/YOTcCgLiC6wRZeO+l0Nbrx4ydczNEvN8nf90R/Rrw9llJIqEoL8CixkXqUJyNG0io6v9ZXAAgjX3do4lojogDuceBsVwhkU36b3ydrLUpET0FSZk5QcSkUcusaRJDDSANZBCC6TCRxiJTS/bnzDwwxlSDJl57gWW2EpFMlW0nCV4xjpjM5X97Txl/i2GMKeIXysEXSAAKxRVYhREnMoekjplqjYGlERDRbNdjQM85mUwmMgYPrsbAByMdaXABPlKw082/AI9PBT2JxYB6AAAAAElFTkSuQmCC">Booking {{res.bookingId}} Waiting for Approval.</div>
+                </div>
+
+            </div>
+            <div class="col-lg-7">
+                <a (click)="SignupEvent(tripstarservice.Signup)" style="color:white;" routerLinkActive="active">{{tripstarservice.Login}}</a>
+            </div>
+            <div class="col-lg-7" style="float:right;" *ngIf="this.tripstarservice.Login == 'Messages'">
+                <!--<a (click)="showprofile()"  routerlink="/dashboard" style="color:white;" routerLinkActive="active">Profile</a>
+                <div class="container"  *ngIf="showprfile" style="width:100%;height:200px;background-color:white;position:fixed;z-index:1;border:1px solid lightgray">
+                    <div >Edit Profile</div>
+                    <div *ngIf="showprfile" >Log out</div>
+                </div>-->
+                <div style="text-align: right;">
+                    <img class="icon icons8-User-Filled" (click)="showprofile()" style="height:30px;width:30px;cursor:pointer;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAACZElEQVRoQ+2Z3XEUMRCEuzOACIAIgAiACIAIgAiACHAGQATgCDARABmYCIAIcAZNddUu3jrfaaXR2KW6Wr3cPUja+bY1mp8ljmTwSDiwgYym5LUpIukugDsAHu9AfyV5nv0i0kEk2fDXAJ4VjP0O4DnJiyygVBBJBvhQadxvAGcAPpL0/66RBiLJCnwJWGNV3pL8HFj7f0kKiKRbAH4B8G903OtRJgvkJYBPUYJp3SlJ7xMaWSA+Fi9CFlwuOif5MLpHFohvoUdRI+Z1JMP2hBcujZZ0NCC+Ph38usamCJCTNCYdrR8kd9OZaoWzfOQEwLvqp+6fOMT1G43qS6RXPdE9SxEfiW+dijwh6dsvNLJAnPw9DVlwucjpfSljLm6fBZIRR4Zw9owUZQhnPw4f8eGdKsOow3c5up+f4iOzF0qKpCp/SLq+7xrZIC5zXe62DJe6b1oW7JubDeI360qxZXRVhvODUkEmX2lJV1LUSPeRha+4b3V/RZafJB+0SFeam67IpEpNgOwKgLtQG0hJ5sr65ILk7dGP1t+aHldPaXvtR0uSY8L7yjc93q01dRtdJbYGNyecbpl2NbS7nX0CcDQ3QLRlaghnBVYoBBQGmZJEdxfDbc4Dx88KOaVvqhabQSTZeEfv7kRvxY+cgJ6QPK3xt2oQSY7CblSnReMaAwEYyB+Fil+5qkAkZXTbK+0+OK3YZVkFGQRipjsIUwRJ+oDTq8RyvW80p/1XbrY1kJbglmlwaS/HnCvfKddAarLYmwKYn7M3a14D0U1bWfG8vcnmqrNXbDzElA1kCBkWRmyKjKbIP2my0zOcsY02AAAAAElFTkSuQmCC">
+                    <div class="container" *ngIf="showprfile" style="width:auto;height:auto;background-color:white;position:fixed;z-index:1;border:1px solid lightgray">
+                        <div style="cursor: pointer;border-bottom:1px solid #607D8B;width: 100%;min-height: 30px;padding-top: 4px;white-space:nowrap;" (click)="Editprofile()">
+                            <!-- User Filled icon by Icons8 -->
+                            <img class="icon icons8-User-Filled" (click)="Editprofile()" style="height:30px;width:30px;cursor:pointer;padding-bottom:.2em;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAABYUlEQVRIS9WW4TEEQRCFv8uADIgAESACREAGiAARHBEgAi4CRIAMXAYXgnpVR93tzezrnjq1pf/ObH/93vT0zoiBYjQQl1bwBrCzUPQnMMuIyIIFHANnHYigJ8BrFJ4Ff3SUdjlaP4yoz4Cl8j6g6LHgyMpnGfADcBoAy/ZNty8D1vntu4TzdZvXblgADQa+Bc4DiqfAltuXUTxYc10DV04JMAGO3b6M4mfgyCUENMV23b4MWCqeXELgBpA7vZEBK5FrsDfgwEG1ngUr6UtP4st5cZadBSth7T7rbFVY6C/VAq6pDp3tjxX/ClwbJKG/Uqti2awrpQdBKS6AO9tZia4WUHPaTiRAjwFdOzlQDXfGslVj0g79AkHdrQLkwEqn18ACyVI7+gK2CqrnkJz4jRJY5/feqLJWh+B7wFdfc6lB9JJcdyx1fUlx9C+ULUxqt1uvUxbW3NVrA3UTuev0Z+BvW/c4H8hjJf0AAAAASUVORK5CYII=">Edit Profile
+                        </div>
+                        <div style="cursor: pointer;width: 100%;min-height: 30px;padding-top: 4px;text-align: left;padding-left: 7px;" *ngIf="showprfile" (click)="Logout()">
+                            <!-- Logout Rounded Up Filled icon by Icons8 -->
+                            <img class="icon icons8-Logout-Rounded-Up-Filled" (click)="Logout()" style="height:20px;width:20px;cursor:pointer;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAACM0lEQVRIS8WXgTEEQRBF/0WACBABIkAEiAARIAJEgAgQASJABIgAGZCBelvdV71zM3szW1elq67s3c707/79e3pM9E82GYm7LOlW0o+kM/vb5GoMMKDPkjYN6V3Sbit4K3AK6lk2g5eAATiXdC8Jp1gJtAQOI/g4zrGRA44Ar5J2AqUb9vwhKfdMkFvJ+iwbKXCa1YGkR0lHJiZ8wsKd1Znv1Jf3hwboe/YlPZR0kAJfGD2shyIAnGaevySdGgsIzIFfJF1LWrMgUDvG2it7vpSE/84iMJs+7fcnSURcMuhPgUtrYWzPXq5b8D1gMoKuX2sVslsEMAlR5yUrE2XpAUMPL2+MogHcTnC1GeOHMpyYulcicBQCqvQWWkTG+KC13sxZJz6vsYvq2wQylC3vWjNmD6VbldSJzIFdALFvF0k1vlD+ttfZgf3HeWr2YMZk3Evu34FbqY49P+3NOcLosZqKCwHgqMb8DMdhjWXF1dpONUBxTbGdWNRygLQC+wHCqcggyh6Z/F5bt5oAoh6YbDNHZjxTERsnzCLMhdubAUNjsTfGRkYQx2xxLLpvlz3f2ciGMRZBZ07E0tUHcL/aQBVX2KExGQOjZAx/n+dck2g9vxx0a4cuewBytroxr/kQfc5wzjzvxGPGWgLogQ4B+0bo4vrCnHbDSTo26dOuTcwQEi00veqkkdbcq6EOB0QeA8hlDSBMEexMlnFDDXBcD518yC7+JwEIuqg9Pos1HqPipj1/OOKbH9RUm4IAAAAASUVORK5CYII=">&nbsp;Log out
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>

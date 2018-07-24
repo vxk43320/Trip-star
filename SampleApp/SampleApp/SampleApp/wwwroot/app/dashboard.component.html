@@ -1,0 +1,506 @@
+﻿
+<top-navigation (guestschanged)="checkNoGuests($event)" (TripSelected)="showTrips($event)" (MessageSelected)="MessageSelection($event)" (chkindt)="chckindate($event)" (chkoutdt)="checkoutdate($event)" (placechangeevent)="GetselectedHosts($event)"></top-navigation>
+<style>
+    .demo-tab-group {
+        border: 1px solid #e8e8e8;
+    }
+
+    .demo-tab-content {
+        padding: 16px;
+    }
+
+    .dropbtn {
+        background-color: white;
+        color: black;
+        padding: 8px;
+        font-size: 12px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+            .dropdown-content a:hover {
+                background-color: #f1f1f1
+            }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+        background-color: lightgrey;
+    }
+
+
+    div.tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+    }
+
+        /* Style the buttons inside the tab */
+        div.tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+            /* Change background color of buttons on hover */
+            div.tab button:hover {
+                background-color: #ddd;
+            }
+
+            /* Create an active/current tablink class */
+            div.tab button.active {
+                background-color: #ccc;
+            }
+
+    /* Style the tab content */
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+</style>
+<nav>
+
+    <div class="tab">
+        <button class="tablinks" (click)="tabevent('First')">Homes</button>
+        <button class="tablinks" (click)="tabevent('Second')">Experiences</button>
+        <button *ngIf="this.tripstarservice.UserType=='Host'" class="tablinks" (click)="tabevent('Third')">Room Blocking</button>
+        <!-- <button class="tablinks" (click)="tabevent('Third')">Places</button>-->
+    </div>
+    <div *ngIf="frsttab == true">
+
+
+        <div class="col-lg-12" *ngIf="!Showtripdetails">
+          
+            <div class="dropdown" *ngIf="!(this.tripstarservice.UserType=='Host')">
+                <button class="dropbtn">
+                    Room Type
+                    <!--<i class="material-icons">arrow_drop_down</i>-->
+                </button>
+                <div class="dropdown-content">
+                    <a (click)="Roomtype('Single')">Single</a>
+                    <a (click)="Roomtype('Double')">Double</a>
+
+                </div>
+            </div>
+            <div class="dropdown" *ngIf="!(this.tripstarservice.UserType=='Host')">
+                <button class="dropbtn">
+                    Price Range
+                    <!--<i class="material-icons">arrow_drop_down</i>-->
+                </button>
+                <div class="dropdown-content">
+                    <a (click)="PriceRange(100,500)">100 - 500</a>
+                    <a (click)="PriceRange(500,1000)">500 - 1000</a>
+                    <a (click)="PriceRange(1000,5000)">1000 - 5000</a>
+                    <a (click)="PriceRange(5000,0)"> >5000</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</nav>
+
+
+
+<div *ngIf="frsttab == true" class="login_page_wrapper" style="width:1300px;">
+    <div class="md-card" id="login_card">
+        <div class="md-card-content large-padding" id="login_form">
+
+
+            <div class="row" *ngIf="!(this.tripstarservice.UserType=='Host')">
+
+                <div class="col-lg-12" *ngIf="!Showtripdetails">
+                    <!--<div class="dropdown">
+                        <button class="dropbtn">Room Type</button>
+                        <div class="dropdown-content">
+                            <a (click)="Roomtype('Single')">Single</a>
+                            <a (click)="Roomtype('Double')">Double</a>
+
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="dropbtn">Price Range</button>
+                        <div class="dropdown-content">
+                            <a (click)="PriceRange(100,500)">100 - 500</a>
+                            <a (click)="PriceRange(500,1000)">500 - 1000</a>
+                            <a (click)="PriceRange(1000,5000)">1000 - 5000</a>
+                            <a (click)="PriceRange(5000,0)"> >5000</a>
+                        </div>
+                    </div>-->
+
+                    <table style="table-layout:fixed;width:100%;">
+
+
+                        <tr style="border:1px solid lightgray;height:40px;font-weight:bold;background-color:#607D8B;color:white;">
+                            <td style="text-align:center;">
+                                Place
+                            </td>
+                            <td style="text-align:right;">
+                                Email
+                            </td>
+                            <td style="text-align:right;">
+                                Price
+                            </td>
+                            <td style="text-align:right;"></td>
+                            <td style="text-align:right;"></td>
+                        </tr>
+
+
+                        <tr *ngFor="let hst of  hosts" (click)="openhost(hst.HostID)" style="border-bottom:1px solid lightgray;padding:10px;height:150px;">
+                            <td style="height:150px">
+                                <!--<img src="{{hst.photo}}" />-->
+                                <img [src]="hst.photo" [hidden]="!hst.photo" style="height:-webkit-fill-available;width:100%;">
+                            </td>
+                            <td>
+                            <td>
+                                {{hst.EmailID}}
+                            </td>
+                            <td>
+                                {{hst.Price}}
+                            </td>
+                            <td>
+                                <button style="background-color:#607D8B;color:white;" (click)="BookRoom(hst)">Book</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div *ngIf="this.tripstarservice.UserID !=''" class="col-lg-12">
+                    <!--<select style="float:left">
+                        <option value="volvo" onclick="lastMonth()">LastMonth</option>
+                        <option value="saab" onclick="All()">All</option>
+                    </select>-->
+                    <div class="dropdown" >
+                        <button class="dropbtn">
+                            Filter
+                            <!--<i class="material-icons">arrow_drop_down</i>-->
+                        </button>
+                        <div class="dropdown-content">
+                            <a (click)="lastMonth()">LastMonth</a>
+                            <a (click)="all()">All</a>
+                        </div>
+                        <button style="float:right" (click)="BacktoRooms()">Back</button>
+                        <table *ngIf="Showtripdetails" style="table-layout:fixed;width:100%;">
+
+
+                            <tr style="border:1px solid lightgray;height:40px;font-weight:bold;background-color:#607D8B;color:white;">
+                                <td style="text-align:center;">
+                                    Place
+                                </td>
+                                <td>
+                                    Room Type
+                                </td>
+                                <td>Check In</td>
+                                <td>Check Out</td>
+                                <td>No of Guests</td>
+                                <td>Approval</td>
+                                <td>Cancle Room</td>
+                            </tr>
+
+
+                            <tr *ngFor="let trip of  trips" style="border-bottom:1px solid lightgray;padding:10px;height:40px;">
+                                <td>
+                                    {{trip.Place}}
+                                </td>
+                                <td>
+                                    {{trip.Roomtype}}
+                                </td>
+                                <td>
+                                    {{trip.CheckIn}}
+                                </td>
+
+                                <td>
+                                    {{trip.CheckOut}}
+                                </td>
+                                <td>
+                                    {{trip.Nofguests}}
+                                </td>
+                                <td>
+                                    {{trip.IsApproved}}
+                                </td>
+                                <td>
+                                    <button *ngIf="toCancle(trip.CheckIn)" style="background-color:#607D8B;color:white;" (click)="cancleRoom(trip.BookingID)">Cancle</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+
+
+
+
+
+
+            </div>
+            <div class="row" *ngIf="this.tripstarservice.UserType=='Host'">
+
+                <div class="col-lg-12">
+                    <button style="float:right" (click)="BacktoBookings()">Back</button>
+                    <table style="table-layout:fixed;width:100%;">
+                        <tr style="border-bottom:1px solid lightgray;padding:10px;font-weight:bold;background-color:#607D8B;color:white;height:40px;">
+                            <td>
+                                Name
+                            </td>
+                            <td>
+                                Room Type
+                            </td>
+                            <td>Check In</td>
+                            <td>Check Out</td>
+                            <td>No of Guests</td>
+                            <td>Approval</td>
+                        </tr>
+                        <tr *ngFor="let booking of  bookings" style="border-bottom:1px solid lightgray;padding:10px;height:40px;">
+                            <td>
+                                {{booking.Name}}
+                            </td>
+                            <td>
+                                {{booking.Roomtype}}
+                            </td>
+                            <td>
+                                {{booking.CheckIn}}
+                            </td>
+
+                            <td>
+                                {{booking.CheckOut}}
+                            </td>
+                            <td>
+                                {{booking.Nofguests}}
+                            </td>
+                            <td>
+                                <input *ngIf="booking.IsApproved" disabled="disabled" type="checkbox" style="background-color:#607D8B;" id="ISapprove" [(ngModel)]="booking.IsApproved" (change)="onChangeapprove(booking)" />
+                                <input *ngIf="booking.IsApproved==false" type="checkbox" style="background-color:#607D8B;" id="ISapprove" [(ngModel)]="booking.IsApproved" (change)="onChangeapprove(booking)" />
+
+                            </td>
+                            <!--<td>
+                                <button style="background-color:#607D8B;color:white;" (click)="BookRoom(hst)">Book</button>
+                            </td>-->
+                        </tr>
+                    </table>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="secondtab == true" class="login_page_wrapper" style="width:1300px;">
+    <div class="md-card" id="login_card">
+        <div class="md-card-content large-padding" id="login_form">
+
+
+            <div class="row" *ngIf="!(this.tripstarservice.UserType=='Host')">
+
+                <div class="col-lg-12" *ngIf="!Showtripdetails">
+
+
+                    <table style="table-layout:fixed;width:100%;">
+
+
+                        <tr style="border:1px solid lightgray;height:40px;font-weight:bold;background-color:#607D8B;color:white;">
+                            <td style="text-align:center;">
+                                Place
+                            </td>
+                            <td style="text-align:right;">
+                                Email
+                            </td>
+                            <td style="text-align:right;">
+                                Price
+                            </td>
+                            <td style="text-align:right;"></td>
+                            <td style="text-align:right;"></td>
+                        </tr>
+
+
+                        <tr *ngFor="let hstexp of  hostexps" (click)="openhost(hstexp.HostID)" style="border-bottom:1px solid lightgray;padding:10px;height:150px;">
+                            <td style="height:150px">
+                                <img [src]="hstexp.photo" [hidden]="!hstexp.photo" style="height:-webkit-fill-available;width:100%;">
+                            </td>
+                            <td>
+                            <td>
+                                {{hstexp.EmailID}}
+                            </td>
+                            <td>
+                                {{hstexp.Price}}
+                            </td>
+                            <td>
+                                <button style="background-color:#607D8B;color:white;" (click)="BookRoom(hstexp)">Book</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div *ngIf="this.tripstarservice.UserID !=''" class="col-lg-12">
+                    <button style="float:right" (click)="BacktoRooms()">Back</button>
+                    <table *ngIf="Showtripdetails" style="table-layout:fixed;width:100%;">
+
+
+                        <tr style="border:1px solid lightgray;height:40px;font-weight:bold;background-color:#607D8B;color:white;">
+                            <td style="text-align:center;">
+                                Place
+                            </td>
+                            <td>
+                                Room Type
+                            </td>
+                            <td>Check In</td>
+                            <td>Check Out</td>
+                            <td>No of Guests</td>
+                            <td>Approval</td>
+                        </tr>
+
+
+                        <tr *ngFor="let trip of  trips" style="border-bottom:1px solid lightgray;padding:10px;height:40px;">
+                            <td>
+                                {{trip.Place}}
+                            </td>
+                            <td>
+                                {{trip.Roomtype}}
+                            </td>
+                            <td>
+                                {{trip.CheckIn}}
+                            </td>
+
+                            <td>
+                                {{trip.CheckOut}}
+                            </td>
+                            <td>
+                                {{trip.Nofguests}}
+                            </td>
+                            <td>
+                                {{trip.IsApproved}}
+                            </td>
+                            <!--<td>
+                                <button style="background-color:#607D8B;color:white;" (click)="BookRoom(hst)">Book</button>
+                            </td>-->
+                        </tr>
+                    </table>
+                </div>
+
+
+
+
+
+
+
+            </div>
+            <div class="row" *ngIf="this.tripstarservice.UserType=='Host'">
+
+                <div class="col-lg-12">
+                    <button style="float:right" (click)="BacktoBookings()">Back</button>
+                    <table style="table-layout:fixed;width:100%;">
+                        <tr style="border-bottom:1px solid lightgray;padding:10px;font-weight:bold;background-color:#607D8B;color:white;height:40px;">
+                            <td>
+                                Name
+                            </td>
+
+                            <td>Check In</td>
+                            <td>Check Out</td>
+                            <td>No of Guests</td>
+                            <td>Approval</td>
+                        </tr>
+                        <tr *ngFor="let booking of  bookingsexp" style="border-bottom:1px solid lightgray;padding:10px;height:40px;">
+                            <td>
+                                {{booking.Name}}
+                            </td>
+
+                            <td>
+                                {{booking.CheckIn}}
+                            </td>
+                            <td>
+                                {{booking.CheckOut}}
+                            </td>
+                            <td>
+                                {{booking.Nofguests}}
+                            </td>
+                            <td>
+                                <input *ngIf="booking.IsApproved" disabled="disabled" type="checkbox" style="background-color:#607D8B;" id="ISapprove" [(ngModel)]="booking.IsApproved" (change)="onChangeapprove(booking)" />
+                                <input *ngIf="booking.IsApproved==false" type="checkbox" style="background-color:#607D8B;" id="ISapprove" [(ngModel)]="booking.IsApproved" (change)="onChangeapprove(booking)" />
+
+                            </td>
+                            <!--<td>
+                                <button style="background-color:#607D8B;color:white;" (click)="BookRoom(hst)">Book</button>
+                            </td>-->
+                        </tr>
+                    </table>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="thirdtab == true" class="login_page_wrapper" style="width:1300px;">
+    <div class="md-card" id="login_card">
+        <div class="md-card-content large-padding" id="login_form">
+            <div class="row" *ngIf="this.tripstarservice.UserType=='Host'">
+                <table style="table-layout:fixed;width:100%;">
+                    <tr style="border:1px solid lightgray;height:40px;font-weight:bold;background-color:#607D8B;color:white;">
+                        <td style="text-align:center;">
+                            Place
+                        </td>
+                        <td style="text-align:center;">
+                            Block In
+                        </td>
+                        <td style="text-align:center;">
+                            Block Out
+                        </td>
+                        <td style="text-align:center;">
+                            Block Room
+                        </td>
+                    </tr>
+
+                    <tr *ngFor="let hstexp of hostblk"   style="border-bottom:1px solid lightgray;padding:10px;height:150px;">
+                        
+                            <td style="height:150px; padding-left:40px" (click)="openhost(hstexp.HostID)">
+                                <img [src]="hstexp.photo" [hidden]="!hstexp.photo" style="height:-webkit-fill-available;width:100%;">
+                            </td>
+                            <td style="height:150px;padding-left:40px">
+                                <input type="date" placeholder="Block Start Date" (change)="blockInDateChange($event)"  />
+                            </td>
+                            <td  style="height:150px;padding-left:40px">
+                                <input type="date" placeholder="Block End Date" (change)="blockOutDateChange($event)" />
+                            </td>
+                            <td>
+                                <button style="background-color:#607D8B;color:white;padding-left:40px" (click)="blockRoom(hstexp.HostID)">BlockRoom</button>
+                            </td>
+                    
+                    </tr>
+               </table>
+            </div>
+         </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,33 @@
+\\sreejap-dev\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\bin\Debug\netcoreapp2.0\SampleApp.deps.json
+\\sreejap-dev\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\bin\Debug\netcoreapp2.0\SampleApp.runtimeconfig.json
+\\sreejap-dev\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\bin\Debug\netcoreapp2.0\SampleApp.runtimeconfig.dev.json
+\\sreejap-dev\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\bin\Debug\netcoreapp2.0\SampleApp.dll
+\\sreejap-dev\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\bin\Debug\netcoreapp2.0\SampleApp.pdb
+\\sreejap-dev\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\obj\Debug\netcoreapp2.0\SampleApp.csproj.CoreCompileInputs.cache
+\\sreejap-dev\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\obj\Debug\netcoreapp2.0\SampleApp.AssemblyInfoInputs.cache
+\\sreejap-dev\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\obj\Debug\netcoreapp2.0\SampleApp.AssemblyInfo.cs
+\\sreejap-dev\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\obj\Debug\netcoreapp2.0\SampleApp.dll
+\\sreejap-dev\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\obj\Debug\netcoreapp2.0\SampleApp.pdb
+\\sreejap-dev\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\obj\Debug\netcoreapp2.0\SampleApp.csprojResolveAssemblyReference.cache
+D:\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\bin\Debug\netcoreapp2.0\SampleApp.deps.json
+D:\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\bin\Debug\netcoreapp2.0\SampleApp.runtimeconfig.json
+D:\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\bin\Debug\netcoreapp2.0\SampleApp.runtimeconfig.dev.json
+D:\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\bin\Debug\netcoreapp2.0\SampleApp.dll
+D:\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\bin\Debug\netcoreapp2.0\SampleApp.pdb
+D:\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\obj\Debug\netcoreapp2.0\SampleApp.csprojResolveAssemblyReference.cache
+D:\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\obj\Debug\netcoreapp2.0\SampleApp.csproj.CoreCompileInputs.cache
+D:\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\obj\Debug\netcoreapp2.0\SampleApp.AssemblyInfoInputs.cache
+D:\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\obj\Debug\netcoreapp2.0\SampleApp.AssemblyInfo.cs
+D:\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\obj\Debug\netcoreapp2.0\SampleApp.dll
+D:\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\obj\Debug\netcoreapp2.0\SampleApp.pdb
+C:\vinay resume\Vinay\SampleApp\SampleApp\SampleApp\bin\Debug\netcoreapp2.0\SampleApp.deps.json
+C:\vinay resume\Vinay\SampleApp\SampleApp\SampleApp\bin\Debug\netcoreapp2.0\SampleApp.runtimeconfig.json
+C:\vinay resume\Vinay\SampleApp\SampleApp\SampleApp\bin\Debug\netcoreapp2.0\SampleApp.runtimeconfig.dev.json
+C:\vinay resume\Vinay\SampleApp\SampleApp\SampleApp\bin\Debug\netcoreapp2.0\SampleApp.dll
+C:\vinay resume\Vinay\SampleApp\SampleApp\SampleApp\bin\Debug\netcoreapp2.0\SampleApp.pdb
+C:\vinay resume\Vinay\SampleApp\SampleApp\SampleApp\obj\Debug\netcoreapp2.0\SampleApp.csproj.CoreCompileInputs.cache
+C:\vinay resume\Vinay\SampleApp\SampleApp\SampleApp\obj\Debug\netcoreapp2.0\SampleApp.AssemblyInfoInputs.cache
+C:\vinay resume\Vinay\SampleApp\SampleApp\SampleApp\obj\Debug\netcoreapp2.0\SampleApp.AssemblyInfo.cs
+C:\vinay resume\Vinay\SampleApp\SampleApp\SampleApp\obj\Debug\netcoreapp2.0\SampleApp.dll
+C:\vinay resume\Vinay\SampleApp\SampleApp\SampleApp\obj\Debug\netcoreapp2.0\SampleApp.pdb
+C:\vinay resume\Vinay\SampleApp\SampleApp\SampleApp\obj\Debug\netcoreapp2.0\SampleApp.csprojResolveAssemblyReference.cache

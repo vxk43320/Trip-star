@@ -1,0 +1,9 @@
+\\SREEJAP-DEV\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\bin\Debug\netcoreapp1.1\SampleApp.deps.json
+\\SREEJAP-DEV\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\bin\Debug\netcoreapp1.1\SampleApp.runtimeconfig.json
+\\SREEJAP-DEV\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\bin\Debug\netcoreapp1.1\SampleApp.runtimeconfig.dev.json
+\\SREEJAP-DEV\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\bin\Debug\netcoreapp1.1\SampleApp.dll
+\\SREEJAP-DEV\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\bin\Debug\netcoreapp1.1\SampleApp.pdb
+\\SREEJAP-DEV\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\obj\Debug\netcoreapp1.1\SampleApp.AssemblyInfo.cs
+\\SREEJAP-DEV\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\obj\Debug\netcoreapp1.1\SampleApp.dll
+\\SREEJAP-DEV\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\obj\Debug\netcoreapp1.1\SampleApp.pdb
+\\SREEJAP-DEV\Srija Sharing Folder\Raghu\SampleApp\SampleApp\SampleApp\obj\Debug\netcoreapp1.1\SampleApp.csprojResolveAssemblyReference.cache

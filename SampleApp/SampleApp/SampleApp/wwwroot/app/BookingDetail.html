@@ -1,0 +1,60 @@
+﻿<style>
+    .suggestions {
+        position: fixed;
+        z-index: 2;
+        background-color: white;
+        border: 1px solid lightgray;
+        width: 33.8%;
+    }
+</style>
+<top-navigation></top-navigation>
+
+<div class="login_page_wrapper" style="width:1000px;">
+    <div class="md-card" id="login_card" style="background-color:aliceblue;">
+        <div class="md-card-content large-padding" id="login_form">
+            <!--<div class="login_heading" style="text-align:center;">
+                <!--<div class="user_avatar"></div>-->
+            <!--<img style="width:70%;" [src]="BizBanner" />-->
+            <!--</div>-->
+            
+                <div class="container">
+                    <div class="row">
+                        <button style="background-color:#607D8B;color:white;float:right;margin-right:15px;width:100px;" (click)="Back()">Back</button>
+                    </div>
+                    <div class="row">
+                        <h4 style="font-weight:bold;">Booking Status of  {{user}}</h4>
+                    </div>
+                        <div class="row">
+                            
+                            <div class="col-lg-2">
+                                CheckIn
+                            </div>
+                            <div style="padding-bottom:20px;" class="col-lg-3">
+                                {{booking_CheckIn}}
+                            </div>
+                            <div class="col-lg-2">
+                                Check Out
+                            </div>
+                            <div class="col-lg-3" style="padding-bottom:30px;">
+                               {{booking_CheckOut}}
+                            </div>
+                            <div class="col-lg-2">
+                                No of Guests
+                            </div>
+                            <div class="col-lg-3" style="padding-bottom:30px;">
+                                {{booking_Noofguests}}
+                            </div>
+                            <div class="col-lg-2">
+                                
+                            </div>
+                            <div class="col-lg-3" style="height:150px;padding-bottom:20px;font-weight:bold;">
+                                {{tripstarservice.bookingstatu}}
+                            </div>
+                           
+
+                        </div>
+                    </div>
+           
+        </div>
+    </div>
+</div>
